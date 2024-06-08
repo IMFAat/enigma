@@ -69,19 +69,20 @@ class rotor_twsix{
         }
         void rotate(){
             int cop_b[sizeof(r_a)]={},cop_c[sizeof(r_a)]={};
-            for(i=0;i<rp;i++){
-                for(j=0;j<sizeof(r_a);j++){
-                    cop_b[j]=r_b[i][j];
-                    cop_c[j]=r_c[i][j];
+            int i_x=0,j_x=0;
+            for(i_x=0;i_x<rp;i_x++){
+                for(j_x=0;j_x<sizeof(r_a);j_x++){
+                    cop_b[j_x]=r_b[i_x][j_x];
+                    cop_c[j_x]=r_c[i_x][j_x];
                 }
-                for(j=0;j<sizeof(r_a);j++){
-                    if(j+pswd[i]+con[i]>25){
-                        r_b[i][j]=cop_b[j+pswd[i]+con[i]-26];
-                        r_c[i][j]=cop_c[j+pswd[i]+con[i]-26];
+                for(j_x=0;j_x<sizeof(r_a);j_x++){
+                    if(j_x+pswd[i_x]+con[i_x]>25){
+                        r_b[i_x][j_x]=cop_b[j_x+pswd[i_x]+con[i_x]-26];
+                        r_c[i_x][j_x]=cop_c[j_x+pswd[i_x]+con[i_x]-26];
                     }
                     else{
-                        r_b[i][j]=cop_b[j+pswd[i]+con[i]];
-                        r_c[i][j]=cop_c[j+pswd[i]+con[i]];
+                        r_b[i_x][j_x]=cop_b[j_x+pswd[i_x]+con[i_x]];
+                        r_c[i_x][j_x]=cop_c[j_x+pswd[i_x]+con[i_x]];
                     }
                 }
             }
@@ -130,15 +131,18 @@ class rotor_twsix{
                         cout<<r_a[index];
                     }
                 }
+                counter();
+                rotate();
             }
             cout<<endl;
         }
         void counter(){
+            int i_x=0;
             con[0]++;
-            for(j=0;j<rp;j++){
-                if(con[j]>25){
-                    con[j+1]++;
-                    con[j]=0;
+            for(i_x=0;i_x<rp;i_x++){
+                if(con[i_x]>25){
+                    con[i_x+1]++;
+                    con[i_x]=0;
                 }
             }
         }
@@ -225,10 +229,7 @@ int main(){
             }
             else{
                 a.encode(str_1);
-                a.counter();
-                a.rotate();
             }
-            
         }
     }    
 }
